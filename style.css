@@ -1,5 +1,4 @@
-/* DRAD INGENIERÍA - ESTILOS PROFESIONALES 2026 */
-
+/* Estilos base existentes conservados */
 :root {
     --azul-drad: #003366;
     --azul-brillante: #00509d;
@@ -9,18 +8,13 @@
     --sombra: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
 body { 
     line-height: 1.6; 
     color: var(--oscuro); 
     background-color: var(--blanco);
-    overflow: hidden; /* Evita doble scroll */
+    overflow-x: hidden; 
 }
 
 /* --- NAVEGACIÓN --- */
@@ -31,36 +25,30 @@ body {
     padding: 15px 5%; 
     background: var(--blanco); 
     position: fixed; 
-    top: 0;
-    width: 100%; 
+    top: 0; width: 100%; 
     z-index: 1000; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    height: 70px;
 }
-.logo { font-size: 1.5rem; font-weight: bold; color: var(--azul-drad); }
+.logo { font-size: 1.2rem; font-weight: bold; color: var(--azul-drad); }
 .logo span { color: #555; font-weight: 300; }
 
-/* Icono del Bot en Navbar */
 #nav-bot-icon {
     background: var(--azul-drad);
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
+    color: white; border: none;
+    width: 40px; height: 40px;
+    border-radius: 50%; cursor: pointer;
     font-size: 18px;
-    transition: 0.3s;
 }
-#nav-bot-icon:hover { background: var(--azul-brillante); transform: scale(1.1); }
 
-/* --- NUEVA ESTRUCTURA DE PANTALLA --- */
+/* --- ESTRUCTURA FLEX RESPONSIVA --- */
 .app-main-container {
     display: flex;
-    height: calc(100vh - 70px); /* Ajuste según altura de navbar */
+    flex-direction: row; /* Horizontal por defecto en PC */
+    height: calc(100vh - 70px);
     margin-top: 70px;
 }
 
-/* Sidebar */
 .sidebar-menu {
     width: 260px;
     background-color: var(--azul-drad);
@@ -68,91 +56,56 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    z-index: 5;
+    transition: all 0.3s ease;
 }
 
-.menu-section-title {
-    color: rgba(255,255,255,0.6);
-    font-size: 0.75rem;
-    font-weight: bold;
-    letter-spacing: 1.5px;
-    margin-bottom: 10px;
-}
+.menu-section-title { color: rgba(255,255,255,0.6); font-size: 0.75rem; font-weight: bold; }
 
 .menu-item-btn {
     background: rgba(255,255,255,0.08);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 14px 18px;
-    text-align: left;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    color: white; border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px; border-radius: 8px;
+    cursor: pointer; text-align: left;
+    display: flex; align-items: center; gap: 10px;
 }
 
-.menu-item-btn:hover {
-    background: var(--azul-brillante);
-    border-color: white;
-    transform: translateX(5px);
+.central-viewer { flex: 1; background: var(--gris-fondo); }
+#central-frame { width: 100%; height: 100%; border: none; }
+
+/* --- AJUSTES PARA CELULAR (FLEX COLUMN) --- */
+@media (max-width: 768px) {
+    .app-main-container {
+        flex-direction: column; /* Apila el menú arriba del contenido */
+    }
+
+    .sidebar-menu {
+        width: 100%; /* El menú ocupa todo el ancho */
+        height: auto;
+        flex-direction: row; /* Botones uno al lado del otro */
+        overflow-x: auto; /* Scroll horizontal si hay muchos botones */
+        padding: 10px;
+    }
+
+    .menu-section-title { display: none; } /* Ocultar título para ganar espacio */
+
+    .menu-item-btn {
+        flex: 0 0 auto; /* No se encogen */
+        white-space: nowrap; /* El texto no salta de línea */
+        font-size: 0.8rem;
+    }
+
+    .central-viewer {
+        height: 100%; /* El visor ocupa el resto del espacio */
+    }
+
+    #chat-window {
+        width: 90vw; /* Chat más ancho en celular */
+        right: 5vw;
+    }
 }
 
-/* Visor Central */
-.central-viewer {
-    flex: 1;
-    background: var(--gris-fondo);
-}
-
-#central-frame {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* --- CHATBOT (ESTILO ORIGINAL MANTENIDO) --- */
-#chat-widget-container { 
-    position: fixed; 
-    bottom: 30px; 
-    right: 5px; 
-    z-index: 10001; 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; 
-}
-
-#chat-window {
-    display: none; 
-    width: 350px; 
-    height: 550px; 
-    background: white;
-    border-radius: 15px; 
-    box-shadow: var(--sombra);
-    margin-bottom: 15px; 
-    overflow: hidden; 
-    flex-direction: column;
-    border: 1px solid #ddd;
-}
-
-#chat-header {
-    background: var(--azul-drad); 
-    color: white; 
-    padding: 15px;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-}
-
+/* Estilo Chatbot conservado */
+#chat-widget-container { position: fixed; bottom: 20px; right: 10px; z-index: 10001; }
+#chat-window { display: none; width: 350px; height: 500px; background: white; border-radius: 15px; box-shadow: var(--sombra); flex-direction: column; }
+#chat-header { background: var(--azul-drad); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 15px 15px 0 0; }
 #chat-header button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
-
-#chat-window iframe { width: 100%; height: 100%; border: none; }
-
-#chat-button {
-    width: 60px; height: 60px; border-radius: 50%; 
-    background: var(--azul-drad); color: white; border: 2px solid white; 
-    cursor: pointer; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    display: flex; justify-content: center; align-items: center; transition: 0.3s;
-}
-#chat-button:hover { transform: scale(1.1); }
