@@ -1,4 +1,3 @@
-/* Estilos base existentes conservados */
 :root {
     --azul-drad: #003366;
     --azul-brillante: #00509d;
@@ -8,13 +7,18 @@
     --sombra: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+}
 
 body { 
     line-height: 1.6; 
     color: var(--oscuro); 
     background-color: var(--blanco);
-    overflow-x: hidden; 
+    overflow: hidden; 
 }
 
 /* --- NAVEGACIÓN --- */
@@ -25,7 +29,8 @@ body {
     padding: 15px 5%; 
     background: var(--blanco); 
     position: fixed; 
-    top: 0; width: 100%; 
+    top: 0;
+    width: 100%; 
     z-index: 1000; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
     height: 70px;
@@ -35,16 +40,22 @@ body {
 
 #nav-bot-icon {
     background: var(--azul-drad);
-    color: white; border: none;
-    width: 40px; height: 40px;
-    border-radius: 50%; cursor: pointer;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
     font-size: 18px;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* --- ESTRUCTURA FLEX RESPONSIVA --- */
+/* --- ESTRUCTURA PRINCIPAL --- */
 .app-main-container {
     display: flex;
-    flex-direction: row; /* Horizontal por defecto en PC */
     height: calc(100vh - 70px);
     margin-top: 70px;
 }
@@ -56,56 +67,119 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: all 0.3s ease;
+    z-index: 5;
+    transition: 0.3s;
 }
 
-.menu-section-title { color: rgba(255,255,255,0.6); font-size: 0.75rem; font-weight: bold; }
+.menu-section-title {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+}
 
 .menu-item-btn {
     background: rgba(255,255,255,0.08);
-    color: white; border: 1px solid rgba(255,255,255,0.1);
-    padding: 12px; border-radius: 8px;
-    cursor: pointer; text-align: left;
-    display: flex; align-items: center; gap: 10px;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 15px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.central-viewer { flex: 1; background: var(--gris-fondo); }
-#central-frame { width: 100%; height: 100%; border: none; }
+.menu-item-btn:hover {
+    background: var(--azul-brillante);
+    transform: translateX(5px);
+}
 
-/* --- AJUSTES PARA CELULAR (FLEX COLUMN) --- */
+.central-viewer {
+    flex: 1;
+    background: var(--gris-fondo);
+    position: relative;
+}
+
+#central-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* --- CHATBOT CORREGIDO --- */
+#chat-widget-container { 
+    position: fixed; 
+    bottom: 20px; 
+    right: 15px; 
+    z-index: 10001; 
+}
+
+#chat-window {
+    display: none; 
+    width: 350px; 
+    height: 500px; 
+    background: white;
+    border-radius: 15px; 
+    box-shadow: var(--sombra);
+    flex-direction: column;
+    overflow: hidden; 
+    border: 1px solid #ddd;
+}
+
+#chat-header {
+    background: var(--azul-drad); 
+    color: white; 
+    padding: 15px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#chat-header button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+
+/* Corrección de altura del iframe */
+#chat-window iframe { 
+    flex: 1; 
+    width: 100%; 
+    height: 100%; 
+    border: none; 
+}
+
+/* --- RESPONSIVIDAD (CELULARES) --- */
 @media (max-width: 768px) {
     .app-main-container {
-        flex-direction: column; /* Apila el menú arriba del contenido */
+        flex-direction: column; /* Menú arriba, contenido abajo */
     }
 
     .sidebar-menu {
-        width: 100%; /* El menú ocupa todo el ancho */
+        width: 100%;
         height: auto;
-        flex-direction: row; /* Botones uno al lado del otro */
-        overflow-x: auto; /* Scroll horizontal si hay muchos botones */
         padding: 10px;
+        flex-direction: row; /* Botones en fila */
+        overflow-x: auto; /* Scroll horizontal si hay muchos botones */
+        gap: 8px;
     }
 
-    .menu-section-title { display: none; } /* Ocultar título para ganar espacio */
+    .menu-section-title { display: none; } /* Ocultar título en móvil para ganar espacio */
 
     .menu-item-btn {
-        flex: 0 0 auto; /* No se encogen */
-        white-space: nowrap; /* El texto no salta de línea */
+        padding: 8px 12px;
         font-size: 0.8rem;
-    }
-
-    .central-viewer {
-        height: 100%; /* El visor ocupa el resto del espacio */
+        white-space: nowrap; /* Evita que el texto se rompa */
     }
 
     #chat-window {
-        width: 90vw; /* Chat más ancho en celular */
+        width: 90vw; /* Casi todo el ancho del celular */
+        height: 60vh;
         right: 5vw;
+        bottom: 80px;
     }
-}
 
-/* Estilo Chatbot conservado */
-#chat-widget-container { position: fixed; bottom: 20px; right: 10px; z-index: 10001; }
-#chat-window { display: none; width: 350px; height: 500px; background: white; border-radius: 15px; box-shadow: var(--sombra); flex-direction: column; }
-#chat-header { background: var(--azul-drad); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 15px 15px 0 0; }
-#chat-header button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+    .logo { font-size: 1rem; }
+}
