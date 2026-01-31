@@ -1,0 +1,158 @@
+/* DRAD INGENIERÍA - ESTILOS PROFESIONALES 2026 */
+
+:root {
+    --azul-drad: #003366;
+    --azul-brillante: #00509d;
+    --gris-fondo: #f4f7f6;
+    --blanco: #ffffff;
+    --oscuro: #1a1a1a;
+    --sombra: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+}
+
+body { 
+    line-height: 1.6; 
+    color: var(--oscuro); 
+    background-color: var(--blanco);
+    overflow: hidden; /* Evita doble scroll */
+}
+
+/* --- NAVEGACIÓN --- */
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 5%; 
+    background: var(--blanco); 
+    position: fixed; 
+    top: 0;
+    width: 100%; 
+    z-index: 1000; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+.logo { font-size: 1.5rem; font-weight: bold; color: var(--azul-drad); }
+.logo span { color: #555; font-weight: 300; }
+
+/* Icono del Bot en Navbar */
+#nav-bot-icon {
+    background: var(--azul-drad);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+}
+#nav-bot-icon:hover { background: var(--azul-brillante); transform: scale(1.1); }
+
+/* --- NUEVA ESTRUCTURA DE PANTALLA --- */
+.app-main-container {
+    display: flex;
+    height: calc(100vh - 70px); /* Ajuste según altura de navbar */
+    margin-top: 70px;
+}
+
+/* Sidebar */
+.sidebar-menu {
+    width: 260px;
+    background-color: var(--azul-drad);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 5;
+}
+
+.menu-section-title {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+.menu-item-btn {
+    background: rgba(255,255,255,0.08);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 14px 18px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu-item-btn:hover {
+    background: var(--azul-brillante);
+    border-color: white;
+    transform: translateX(5px);
+}
+
+/* Visor Central */
+.central-viewer {
+    flex: 1;
+    background: var(--gris-fondo);
+}
+
+#central-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* --- CHATBOT (ESTILO ORIGINAL MANTENIDO) --- */
+#chat-widget-container { 
+    position: fixed; 
+    bottom: 30px; 
+    right: 5px; 
+    z-index: 10001; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+}
+
+#chat-window {
+    display: none; 
+    width: 350px; 
+    height: 550px; 
+    background: white;
+    border-radius: 15px; 
+    box-shadow: var(--sombra);
+    margin-bottom: 15px; 
+    overflow: hidden; 
+    flex-direction: column;
+    border: 1px solid #ddd;
+}
+
+#chat-header {
+    background: var(--azul-drad); 
+    color: white; 
+    padding: 15px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
+
+#chat-header button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+
+#chat-window iframe { width: 100%; height: 100%; border: none; }
+
+#chat-button {
+    width: 60px; height: 60px; border-radius: 50%; 
+    background: var(--azul-drad); color: white; border: 2px solid white; 
+    cursor: pointer; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    display: flex; justify-content: center; align-items: center; transition: 0.3s;
+}
+#chat-button:hover { transform: scale(1.1); }
